@@ -68,17 +68,19 @@ namespace UserAdminitration.BusinessLayer {
 		
 		public static void RemoveUser(User user)
 		{
-			
+			RemoveUser(user.ID);
 		}
 		
 		public static void RemoveUser(string id) 
 		{
-			
+			if ( SListUser.ContainsKey(id) )
+				SListUser.Remove(id);
 		}
 		
 		public static void UpdateUser(User user) 
 		{
-			
+			if ( SListUser.ContainsKey(user.ID) )
+				SListUser[user.ID] = user;	
 		}
 		
 		/// <summary>
@@ -91,9 +93,9 @@ namespace UserAdminitration.BusinessLayer {
 		}
 		
 		public static void Test() 
-		{	
-			SListUser.Add( "Pinochio", new User { ID = "Pinochio", FirstName = "Michelle" , LastName = "Power City" } );
-			SListUser.Add( "babours", new User { ID = "babours", FirstName = "Niglooo" , LastName = "Gadaaga" } );
+		{
+			AddUser( new User { FirstName = "Michelle" , LastName = "Power City" } );
+			AddUser( new User { FirstName = "Niglooo" , LastName = "Gadaaga" } );
 		}
 		
 		/// <summary>

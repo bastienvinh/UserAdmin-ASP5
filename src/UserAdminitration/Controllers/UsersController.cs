@@ -7,6 +7,7 @@ using UserAdminitration.Models;
 using UserAdminitration.Components.Web;
 using UserAdminitration.Web.Manager;
 using UserAdminitration.BusinessLayer;
+using UserAdminitration.ViewModels;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -33,16 +34,27 @@ namespace UserAdminitration.Controllers
 
     // GET api/values/5
     [HttpGet("{id}")]
-    public string Get(int id)
+    public HttpResponse<User> Get(string id)
     {
-      return "lala";
+      var prepareResp = ServerManager.CreateResponseOne<User>();
+      
+      if (!BLLUser.UserIdExists( id ))
+        prepareResp.FailFoundRessource();
+       else 
+       {
+         prepareResp.Success();
+         ((HttpResponse<User>)prepareResp).SetData( BLLUser.GetById(id) );
+       }
+        
+      return (HttpResponse<User>) prepareResp;
     }
 
     // POST api/values
     [HttpPost]
-    public void Post([FromBody]string value)
+    public void Post([FromBody]RequestUserUpdate value)
     {
-       
+      Console.WriteLine("------> Value test : { {0}, {1}, {2} }", value.FirstName, value.LastName, value.EmailAddress);
+      //BLLUser.AddUser( new User { FirstName = value.FirstName, LastName = value.LastName } );
     }
 
     // PUT api/values/5
