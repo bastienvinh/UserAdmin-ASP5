@@ -1,0 +1,3 @@
+artifacts/*
+src/UserAdminitration/node_modules
+src/UserAdminitration/wwwroot/lib/*
