@@ -5,13 +5,30 @@ using System.Threading.Tasks;
 
 namespace UserAdminitration.Models
 {
-  public class User
+  public class User : UserAdminitration.BusinessLayer.Entity.IEntity
   {
+    
+        
     public string ID { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public string DateCreated { get; }
+    public DateTime DateCreated { get; }
 
-    public string LastUpdated { get; }
+    public DateTime LastUpdated { get; private set; }
+
+  
+    public User() {
+      
+      FirstName = "";
+      LastName = "";
+      DateCreated = DateTime.Now;
+      LastUpdated = DateTime.Now;
+    }
+    
+    
+    public void UpdateOnSave() {
+      LastUpdated = DateTime.Now;
+    }
+  
   }
 }

@@ -36,6 +36,12 @@ namespace UserAdminitration
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+            
+            // BV : Add our Service here
+            // Remark : Do it a better way
+            UserAdminitration.BusinessLayer.BLLUser.Init();
+            UserAdminitration.BusinessLayer.BLLUser.Test();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using UserAdminitration.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,14 +16,14 @@ namespace UserAdminitration.Controllers
     [HttpGet]
     public IEnumerable<string> Get()
     {
-      return new string[] { "value1", "value2" };
+      return new string[] { "pope", "mimi" };
     }
 
     // GET api/values/5
     [HttpGet("{id}")]
     public string Get(int id)
     {
-      return "value";
+      return "lala";
     }
 
     // POST api/values
