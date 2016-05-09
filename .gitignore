@@ -1,5 +1,6 @@
 artifacts/*
 src/UserAdminitration/npm-debug.log
+test/UserAdminitration.UnitTests/bin
 src/UserAdminitration/bin
 src/UserAdminitration/node_modules
 src/UserAdminitration/wwwroot/lib/*

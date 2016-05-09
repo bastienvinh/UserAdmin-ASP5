@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using UserAdminitration.Models;
+using UserAdminitration.Components.Web;
+using UserAdminitration.Web.Manager;
+using UserAdminitration.BusinessLayer;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,11 +15,20 @@ namespace UserAdminitration.Controllers
   [Route("api/[controller]")]
   public class UsersController : Controller
   {
+    // Remark : I should use 
+    
+    
     // GET: api/values
     [HttpGet]
-    public IEnumerable<string> Get()
-    {
-      return new string[] { "pope", "mimi" };
+    public HttpResponseList<User> Get()
+    {     
+      // There no way you can fail this request, so it will be always be OK.
+     var data = BLLUser.GetAll();
+     
+     // Remark : I am not sure it's good idea to build like that. 
+      return ((HttpResponseList<User>) (ServerManager.CreateResponseList<User>()
+        .Success()))
+        .SetListData(data);
     }
 
     // GET api/values/5
@@ -30,7 +42,7 @@ namespace UserAdminitration.Controllers
     [HttpPost]
     public void Post([FromBody]string value)
     {
-
+       
     }
 
     // PUT api/values/5

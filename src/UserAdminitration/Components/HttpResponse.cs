@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UserAdminitration.Web
+namespace UserAdminitration.Components.Web
 {
 	public interface IResponse 
 	{
-		int CodeError { get; }
-		string MessageError { get; }
-		bool HasError { get; }
+		int CodeError { get; set; }
+		string MessageError { get; set; }
+		bool HasError { get; set; }
 	}
+	
+	// Remark : Should use IActionResult as interface too
 
 	public class HttpResponse : IResponse 
 	{
@@ -24,7 +26,14 @@ namespace UserAdminitration.Web
 		public string MessageError { get;set; }
 		public bool HasError { get; set; }
 
-		public T Data { get;set; }
+		public T Data { get; private set; }
+		
+		
+		public HttpResponse<T> SetData( T data )
+		{
+			Data = data;
+			return this;
+		}
 	}
 
 	public class HttpResponseList<T> : IResponse 
@@ -35,10 +44,17 @@ namespace UserAdminitration.Web
 
 		public IEnumerable<T> Data { get; private set; }
 		
-		public HttpResponseList(IEnumerable<T> data) {
-			Data = data;
+		public HttpResponseList() {
+			Data = new List<T>();
 		}
 		
+		public HttpResponseList<T> SetListData( IEnumerable<T> data )
+		{
+			this.Data = data;
+			return this;
+		}
 		
 	}
+	
+	
 }
