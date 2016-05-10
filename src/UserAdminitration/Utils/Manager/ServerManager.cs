@@ -20,6 +20,10 @@ namespace UserAdminitration.Web.Manager
 			return new HttpResponseList<T>().None();
 		}
 		
+		public static IResponse CreateResponseAction()
+		{
+			return new HttpResponse().None();
+		}
 		
 	}
 	
@@ -60,7 +64,6 @@ namespace UserAdminitration.Web.Manager
 			resp.CodeError = 400;
 			resp.MessageError = "Bad Request";
 			resp.HasError = true;
-			// TODO : Must implement it
 			return resp;
 		}
 		
@@ -69,6 +72,15 @@ namespace UserAdminitration.Web.Manager
 		{
 			resp.CodeError = 404;
 			resp.MessageError = "Ressource not found";
+			resp.HasError = true;
+			return resp;
+		}
+		
+		
+		public static IResponse FailDuplicateData(this IResponse resp) 
+		{
+			resp.CodeError = 406;
+			resp.MessageError = "Not Acceptable : duplicate data";
 			resp.HasError = true;
 			return resp;
 		}

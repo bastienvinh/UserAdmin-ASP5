@@ -11,4 +11,12 @@ namespace UserAdminitration.ViewModels
 		public string LastName { get; set; }
 		public string EmailAddress { get; set; }
 	}
+	
+	
+	public class RequestUserAdd
+	{
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+		public string EmailAddress { get; set; }
+	}
 }

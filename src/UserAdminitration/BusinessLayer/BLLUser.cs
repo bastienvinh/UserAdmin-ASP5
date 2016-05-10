@@ -66,21 +66,30 @@ namespace UserAdminitration.BusinessLayer {
 		/// <returns>True of False</returns>
 		public static bool UserIdExists(string id) => SListUser.ContainsKey(id);
 		
-		public static void RemoveUser(User user)
+		public static bool RemoveUser(User user)
 		{
-			RemoveUser(user.ID);
+			return RemoveUser(user.ID);
 		}
 		
-		public static void RemoveUser(string id) 
+		public static bool RemoveUser(string id) 
 		{
 			if ( SListUser.ContainsKey(id) )
+			{
 				SListUser.Remove(id);
+				return true;
+			}
+			
+			return false;
 		}
 		
-		public static void UpdateUser(User user) 
+		public static User UpdateUser(User user) 
 		{
-			if ( SListUser.ContainsKey(user.ID) )
-				SListUser[user.ID] = user;	
+			if ( SListUser.ContainsKey(user.ID) ) {
+				user.UpdateOnSave();
+				SListUser[user.ID] = user;
+			}
+			
+			return user;
 		}
 		
 		/// <summary>

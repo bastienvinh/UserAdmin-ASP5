@@ -51,22 +51,76 @@ namespace UserAdminitration.Controllers
 
     // POST api/values
     [HttpPost]
-    public void Post([FromBody]RequestUserUpdate value)
+    public HttpResponse<User> Post(RequestUserAdd newUser)
     {
-      Console.WriteLine("------> Value test : { {0}, {1}, {2} }", value.FirstName, value.LastName, value.EmailAddress);
-      //BLLUser.AddUser( new User { FirstName = value.FirstName, LastName = value.LastName } );
+      // TODO : Verify is Model is valid
+      
+      var prepareResp = ServerManager.CreateResponseOne<User>();
+      
+      if (BLLUser.UserEmailExists(newUser.EmailAddress))
+      {
+        prepareResp.FailDuplicateData();
+      }
+      else
+      {
+        // Create a new User
+        var user = BLLUser.AddUser( new User { FirstName = newUser.FirstName, LastName = newUser.LastName, EmailAddress = newUser.EmailAddress } );
+        prepareResp.Success();
+        ((HttpResponse<User>) prepareResp).SetData( user );
+        Console.WriteLine("Add new user ID : {0}", user.ID);
+      }
+      
+      return (HttpResponse<User>) prepareResp;
     }
 
     // PUT api/values/5
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody]string value)
+    public HttpResponse<User> Put(string id, RequestUserAdd value)
     {
+      // It's where we gonna change our user
+      
+      
+      var prepareResp = ServerManager.CreateResponseOne<User>();
+      
+      // TODO : Finish it
+      if (!BLLUser.UserIdExists(id))
+      {
+        prepareResp.FailFoundRessource();
+      }
+      else
+      {
+        prepareResp.Success();
+        
+        var oldUser = BLLUser.GetById(id); // We don't want to change it's ID So we retrive the same.
+        oldUser.FirstName = value.FirstName;
+        oldUser.LastName = value.LastName;
+        oldUser.EmailAddress = value.EmailAddress; // TODO : Verify mail already exists
+        
+        var newUser = BLLUser.UpdateUser( oldUser );
+        
+        ((HttpResponse<User>)prepareResp).SetData(newUser);
+        
+        Console.WriteLine("Change User : {0}", id);
+        Console.WriteLine("New Value affected : {0}, {1}, {2}", value.FirstName, value.LastName, value.EmailAddress);
+      }
+      
+      return (HttpResponse<User>) prepareResp;
     }
 
     // DELETE api/values/5
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    public HttpResponse Delete(string id)
     {
+      var prepareResp = ServerManager.CreateResponseAction();
+      
+      if (BLLUser.RemoveUser(id))
+        prepareResp.Success();
+      else
+        prepareResp.FailFoundRessource();
+      
+      return (HttpResponse) prepareResp;
     }
+    
+    
   }
 }

@@ -71,15 +71,15 @@ namespace UserAdminitration.Unit.Test.BusinessLayer
 			Assert.False( BLLUser.UserIdExists("Trevor") );
 		}
 		
-		// [Fact]
-		// public void UserEmailExists()
-		// {
-		// 	BLLUser.Clear();
-		// 	var user = BLLUser.AddUser( new User { EmailAddress = "Destination@lala.fr" } );
+		[Fact]
+		public void UserEmailExists()
+		{
+			BLLUser.Clear();
+			var user = BLLUser.AddUser( new User { EmailAddress = "Destination@lala.fr" } );
 			
-		// 	Assert.True( BLLUser.UserEmailExists("Destination@lala.fr") );
-		// 	BLLUser.Clear();
-		// }
+			Assert.True( BLLUser.UserEmailExists("Destination@lala.fr") );
+			BLLUser.Clear();
+		}
 		
 		
 		[Fact]
@@ -89,7 +89,34 @@ namespace UserAdminitration.Unit.Test.BusinessLayer
 			Assert.False( BLLUser.UserEmailExists("Destination@lala.fr") );
 		}
 		
-		// TODO : Add more unit test
+		[Fact]
+		public void DeleteNothingUser()
+		{
+			BLLUser.Clear();
+			Assert.False( BLLUser.RemoveUser( "Nothing to delect" ) );
+		}
 		
+		
+		[Fact]
+		public void DeleteUserByObject()
+		{
+			BLLUser.Clear();
+			var user = BLLUser.AddUser( new User { EmailAddress = "deleted@user.fr" } );
+			
+			Assert.True( BLLUser.RemoveUser(user) );
+			BLLUser.Clear();
+		}
+		
+		[Fact]
+		public void DeleteUserByID()
+		{
+			BLLUser.Clear();
+			var user = BLLUser.AddUser( new User { EmailAddress = "deleted@user.fr" } );
+			
+			Assert.True( BLLUser.RemoveUser(user.ID) );
+			BLLUser.Clear();
+		}
+		
+		// TODO : Add more unit test
 	}
 }
