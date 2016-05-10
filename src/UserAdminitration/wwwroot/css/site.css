@@ -1,34 +1,30 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿
+.cus-block-content {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+#table_list_user > tbody > tr {
+	height: 35px;
 }
 
-/* Set widths on the form inputs since otherwise they're 100% wide */
-input,
-select,
-textarea {
-    max-width: 280px;
+
+table#table_list_user tbody tr td {
+	text-align: center;
+	vertical-align: center;
 }
 
-/* Carousel */
-.carousel-caption {
-    z-index: 10 !important;
+table#table_list_user thead th {
+	text-align: center;
+	vertical-align: center;
+	height: 45px;
 }
 
-    .carousel-caption p {
-        font-size: 20px;
-        line-height: 1.4;
-    }
+table tbody td.actions-td span {
+	cursor: pointer;
+	margin: 10px;
+}
 
-@media (min-width: 768px) {
-    .carousel-caption {
-        z-index: 10 !important;
-    }
+form#bloc_form_user button {
+	width: 150px;
 }

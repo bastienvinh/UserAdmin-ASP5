@@ -103,8 +103,8 @@ namespace UserAdminitration.BusinessLayer {
 		
 		public static void Test() 
 		{
-			AddUser( new User { FirstName = "Michelle" , LastName = "Power City" } );
-			AddUser( new User { FirstName = "Niglooo" , LastName = "Gadaaga" } );
+			AddUser( new User { FirstName = "Michelle" , LastName = "Power City", EmailAddress = "tory@menelas.com" } );
+			AddUser( new User { FirstName = "Niglooo" , LastName = "Gadaaga", EmailAddress = "parker@gmail.com" } );
 		}
 		
 		/// <summary>
