@@ -94,6 +94,9 @@ $(function () {
 	var UserModel = function() {
 		var self = this;
 		
+		self.optionsSortColumns = ko.observableArray(['Name', 'Email', 'Date Created']);
+		self.selectedSortValue = ko.observableArray([""]);
+		
 		self.users = ko.observableArray([]);
 		self.selectedUser = {
 			FirstName: "",
@@ -103,9 +106,25 @@ $(function () {
 		
 		self.updatingdUser = {
 			ID: ko.observable(""),
-			FirstName: ko.observable("toto"),
-			LastName: ko.observable("mili"),
-			EmailAddress: ko.observable("pop")
+			FirstName: ko.observable(""),
+			LastName: ko.observable(""),
+			EmailAddress: ko.observable("")
+		};
+		
+		// We use this to sort our functions.
+		self.tabSortCompare = {
+			"Email_a" : function (a, b) {
+				return a.EmailAddress > b.EmailAddress
+			},
+			"Email_b" : function (a, b) {
+				return a.EmailAddress < b.EmailAddress
+			},
+			"Date Created_a" : function (a, b) {
+				return a.DateCreated > b.DateCreated;
+			},
+			"Name_a" : function (a, b) {
+				return a.FirstName > b.FirstName; 
+			}
 		};
 		
 		
@@ -171,6 +190,20 @@ $(function () {
 			self.updatingdUser.EmailAddress( data.EmailAddress );
 			
 			window.scrollTo(0, 0);
+		}
+		
+		self.sortByColumn = function() {
+			
+			var value = self.selectedSortValue()[0];
+			
+			// TODO : Play with toggle for reverser sorting
+			
+			if ( value != null && value != "" )
+			{
+				var functionCompare = self.tabSortCompare[ value + '_a' ];
+				self.users.sort( functionCompare );
+			}
+			
 		}
 		
 	}

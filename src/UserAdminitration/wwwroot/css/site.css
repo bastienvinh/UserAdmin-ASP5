@@ -28,3 +28,8 @@ table tbody td.actions-td span {
 form#bloc_form_user button {
 	width: 150px;
 }
+
+div.cus-block-content div.row {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}

@@ -43,35 +43,46 @@
     </form>
     
     <div class="cus-block-content col-xs-12 col-md-8 col-md-offset-1 table-responsive">
-        <table id="table_list_user" class="table-bordered table-striped col-md-12 col-xs-12">
-            <thead>
-                <tr>
-                    <th>FirstName</th>
-                    <th>LastName</th>
-                    <th>Email</th>
-                    <th>Created</th>
-                    <th>Updated</th>
-                    <th>Delete</th>
-                    <th>Modify</th>
-                </tr>
-            </thead>
-            <tbody data-bind="foreach: users">
-                <tr>
-                    <td data-bind='text: FirstName, uniqueName: true'></td>
-                    <td data-bind='text: LastName, uniqueName: true'></td>
-                    <td data-bind='text: EmailAddress, uniqueName: true'></td>
-                    <td data-bind='text: moment(DateCreated).format("LLL"), uniqueName: true'></td>
-                    <td data-bind='text: moment(LastUpdated).format("LLL"), uniqueName: true'></td>
-                    <td class="actions-td">
-                        <span data-bind='click: $root.removeUser' title="delete" class="glyphicon glyphicon-remove" />
-                    </td>
-                    <td class="actions-td">
-                        <span data-bind='click: $root.showData' title="modify" class="glyphicon glyphicon-search" />
-                    </td>
-                </tr>
-               
-            </tbody>     
-        </table>
+        
+        <div class="row">
+            <label for="sort_user_list_select">Sort by :</label>
+            <select id="sort_user_list_select" class="form-control" data-bind="options: optionsSortColumns, selectedOptions: selectedSortValue, event: { change: sortByColumn }"></select>
+        </div>
+        
+        <div class="row">
+            
+            <table id="table_list_user" class="table table-striped col-md-12 col-xs-12">
+                <thead>
+                    <tr>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Email</th>
+                        <th>Created</th>
+                        <th>Updated</th>
+                        <th>Delete</th>
+                        <th>Modify</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: users">
+                    <tr>
+                        <td data-bind='text: FirstName, uniqueName: true'></td>
+                        <td data-bind='text: LastName, uniqueName: true'></td>
+                        <td data-bind='text: EmailAddress, uniqueName: true'></td>
+                        <td data-bind='text: moment(DateCreated).format("LLL"), uniqueName: true'></td>
+                        <td data-bind='text: moment(LastUpdated).format("LLL"), uniqueName: true'></td>
+                        <td class="actions-td">
+                            <span data-bind='click: $root.removeUser' title="delete" class="glyphicon glyphicon-remove" />
+                        </td>
+                        <td class="actions-td">
+                            <span data-bind='click: $root.showData' title="modify" class="glyphicon glyphicon-search" />
+                        </td>
+                    </tr>
+                
+                </tbody>     
+            </table>
+        </div>
+        
+        
     </div>
     
 <div>
